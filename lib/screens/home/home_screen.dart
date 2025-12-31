@@ -166,90 +166,96 @@ class _HomeScreenState extends State<HomeScreen> {
         if (state is! ProductLoaded) return const SizedBox.shrink();
 
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Categories',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              const SizedBox(height: 8),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    FilterChip(
-                      label: const Text('All'),
-                      selected: state.selectedCategory == null,
-                      onSelected: (_) {
-                        context.read<ProductCubit>().filterByCategory(null);
-                      },
-                    ),
-                    const SizedBox(width: 8),
-                    ...state.categories.map((category) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: FilterChip(
-                          label: Text(category),
-                          selected: state.selectedCategory == category,
+          constraints: const BoxConstraints(maxHeight: 300),
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Categories',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  const SizedBox(height: 8),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        FilterChip(
+                          label: const Text('All'),
+                          selected: state.selectedCategory == null,
                           onSelected: (_) {
-                            context.read<ProductCubit>().filterByCategory(category);
+                            context.read<ProductCubit>().filterByCategory(null);
                           },
                         ),
-                      );
-                    }).toList(),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Sort By',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              const SizedBox(height: 8),
-              DropdownButton<SortOption>(
-                value: state.sortOption,
-                isExpanded: true,
-                items: const [
-                  DropdownMenuItem(
-                    value: SortOption.none,
-                    child: Text('None'),
+                        const SizedBox(width: 8),
+                        ...state.categories.map((category) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: FilterChip(
+                              label: Text(category),
+                              selected: state.selectedCategory == category,
+                              onSelected: (_) {
+                                context.read<ProductCubit>().filterByCategory(category);
+                              },
+                            ),
+                          );
+                        }).toList(),
+                      ],
+                    ),
                   ),
-                  DropdownMenuItem(
-                    value: SortOption.priceLowToHigh,
-                    child: Text('Price: Low to High'),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Sort By',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  DropdownMenuItem(
-                    value: SortOption.priceHighToLow,
-                    child: Text('Price: High to Low'),
+                  const SizedBox(height: 8),
+                  DropdownButton<SortOption>(
+                    value: state.sortOption,
+                    isExpanded: true,
+                    items: const [
+                      DropdownMenuItem(
+                        value: SortOption.none,
+                        child: Text('None'),
+                      ),
+                      DropdownMenuItem(
+                        value: SortOption.priceLowToHigh,
+                        child: Text('Price: Low to High'),
+                      ),
+                      DropdownMenuItem(
+                        value: SortOption.priceHighToLow,
+                        child: Text('Price: High to Low'),
+                      ),
+                      DropdownMenuItem(
+                        value: SortOption.rating,
+                        child: Text('Rating'),
+                      ),
+                      DropdownMenuItem(
+                        value: SortOption.nameAZ,
+                        child: Text('Name (A-Z)'),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      if (value != null) {
+                        context.read<ProductCubit>().sortProducts(value);
+                      }
+                    },
                   ),
-                  DropdownMenuItem(
-                    value: SortOption.rating,
-                    child: Text('Rating'),
-                  ),
-                  DropdownMenuItem(
-                    value: SortOption.nameAZ,
-                    child: Text('Name (A-Z)'),
-                  ),
+                  const SizedBox(height: 8),
+                  if (state.selectedCategory != null || state.searchQuery.isNotEmpty)
+                    TextButton.icon(
+                      icon: const Icon(Icons.clear),
+                      label: const Text('Clear Filters'),
+                      onPressed: () {
+                        _searchController.clear();
+                        context.read<ProductCubit>().clearFilters();
+                      },
+                    ),
                 ],
-                onChanged: (value) {
-                  if (value != null) {
-                    context.read<ProductCubit>().sortProducts(value);
-                  }
-                },
               ),
-              const SizedBox(height: 8),
-              if (state.selectedCategory != null || state.searchQuery.isNotEmpty)
-                TextButton.icon(
-                  icon: const Icon(Icons.clear),
-                  label: const Text('Clear Filters'),
-                  onPressed: () {
-                    _searchController.clear();
-                    context.read<ProductCubit>().clearFilters();
-                  },
-                ),
-            ],
+            ),
           ),
         );
       },
