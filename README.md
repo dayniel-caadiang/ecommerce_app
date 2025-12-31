@@ -90,15 +90,15 @@ Endpoints:
 ## Screenshots
 
 ### Home Screen - Grid View
-![Home Grid View]<img src="assets/images/grid_view.png" width="300">
+<img src="assets/images/grid_view.png" width="300">
 - Product grid layout
 
 ### Home Screen - List View
-![Home List View]<img src="assets/images/home_list.png" width="300">
+<img src="assets/images/home_list.png" width="300">
 - Product list layout
 
 ### Product Detail
-![Product Detail]<img src="assets/images/product_detail.png" width="300">
+<img src="assets/images/product_detail.png" width="300">
 - Full product image
 - Description
 - Ratings
@@ -106,28 +106,28 @@ Endpoints:
 - Add to cart button
 
 ### Shopping Cart
-![Shopping Cart] <img src="assets/images/cart.png" width="300">
+<img src="assets/images/cart.png" width="300">
 - Cart items list
 - Quantity controls
 - Total price
 - Remove items
 
 ### Empty Cart
-![Empty Cart]<img src="assets/images/empty_cart.png" width="300">
+<img src="assets/images/empty_cart.png" width="300">
 - Empty state message
 - Start shopping button
 
 ### Settings
-![Settings]<img src="assets/images/settings.png" width="300">
+<img src="assets/images/settings.png" width="300">
 - Dark mode toggle
 - App information
 
 ### Dark Mode
-![Dark Mode]<img src="assets/images/dark_mode.png" width="300">
+<img src="assets/images/dark_mode.png" width="300">
 - All screens support dark theme
 
 ### Search & Filter
-![Search Filter]<img src="assets/images/search_filter.png" width="300">
+<img src="assets/images/search_filter.png" width="300">
 - Search results
 - Active filters
 - Sort options
@@ -160,6 +160,3 @@ flutter run
 
 No internet: App works offline with cached products
 
-## Version
-
-1.0.0
