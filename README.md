@@ -133,7 +133,7 @@ Endpoints:
 - Sort options
 
 ### About App
-![Offline Mode]<img src="assets/images/about.png" width="300">
+<img src="assets/images/about.png" width="300">
 
 
 ## Implementation Checklist
